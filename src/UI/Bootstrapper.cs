@@ -18,14 +18,9 @@ internal class Bootstrapper : BootstrapperBase
         Initialize();
     }
 
-    protected override async void Configure()
-    {
-        base.Configure();
-        await ServiceProvider.InitialiseDatabaseAsync();
-    }
-
     protected override async void OnStartup(object sender, StartupEventArgs e)
     {
+        await ServiceProvider.InitialiseDatabaseAsync();
         await DisplayRootViewForAsync<MainViewModel>();
     }
 

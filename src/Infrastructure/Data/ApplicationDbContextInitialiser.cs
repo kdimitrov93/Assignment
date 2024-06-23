@@ -81,7 +81,7 @@ public class ApplicationDbContextInitialiser
             await _userManager.CreateAsync(administrator, "Administrator1!");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-                await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+                await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
             }
         }
 
@@ -98,6 +98,27 @@ public class ApplicationDbContextInitialiser
                     new TodoItem { Title = "Check off the first item ✅" },
                     new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
                     new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
+                }
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        if (!_context.Countries.Any())
+        {
+            _context.Countries.Add(new Country()
+            {
+                Name = "Bulgaria",
+                Cities = new List<City>
+                {
+                    new City()
+                    {
+                        Name = "Sofia"
+                    },
+                    new City()
+                    {
+                        Name = "Varna"
+                    }
                 }
             });
 
